@@ -1,0 +1,84 @@
+@use "sass:map";
+
+:root {
+    --backcolor: blue;
+    --font: red;
+    --div: green;
+}
+
+$pontos: (
+    mobile-small: 360px,
+    mobile: 480px,
+    tablet: 759px,
+    desktop-small: 1024px,
+    desktop-big: 1200px
+);
+
+@function breakpoint($ponto) {
+    @if map.has-key($pontos, $ponto) {
+        @return map.get($pontos, $ponto);
+    } @else {
+        @warn 'o ponto #{$ponto} não existe. Use: #{map.keys($pontos)}';
+        @return null;
+    }
+}
+
+@mixin quebra($ponto) {
+    $valor: breakpoint($ponto);
+    @if $valor {
+        @media (min-width: $valor) {
+        @content;
+        }
+    } 
+}
+
+html {
+    font-size: 16px;
+}
+
+*,
+*::after,
+*::before{
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+    min-height: 100vh;
+}
+
+.box {
+    position: relative;
+    margin: auto;
+    width: clamp(400px, 80vw, 1024px);
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 1rem;
+
+    @include quebra(tablet) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @include quebra(desktop-small) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.item-box {
+    background-color: black;
+    width: 100%;
+}
+
+#item1 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span {
+        color: white;
+        font-size: clamp(7rem, 50vw, 15rem);
+    }
+}

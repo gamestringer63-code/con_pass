@@ -1,0 +1,58 @@
+:root {
+  --backcolor: blue;
+  --font: red;
+  --div: green;
+}
+
+html {
+  font-size: 16px;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  min-height: 100vh;
+}
+
+.box {
+  position: relative;
+  margin: auto;
+  width: clamp(400px, 80vw, 1024px);
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1rem;
+}
+@media (min-width: 759px) {
+  .box {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .box {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.item-box {
+  background-color: black;
+  width: 100%;
+}
+
+#item1 {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#item1 span {
+  color: white;
+  font-size: clamp(7rem, 50vw, 15rem);
+}/*# sourceMappingURL=style.css.map */
